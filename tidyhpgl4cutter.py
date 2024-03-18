@@ -43,8 +43,8 @@ Uses the Chiplotle library: http://music.columbia.edu/cmc/chiplotle/
 """
 
 
-from chiplotle import *
-from chiplotle.hpgl.commands import *
+from chiplotle3 import *
+from chiplotle3.hpgl.commands import *
 import sys
 
 #plotter=instantiate_virtual_plotter((0,0), (20000,15000))
@@ -58,7 +58,7 @@ spchunks=[]
 # this creates a list like [(6, 12), (13, 16), (17, 215), (216, 4631), (4632, 4830)]
 # where the first value in each tuple is the index of the SP command and the second the
 # last non-SP command
-for cmdindex in xrange(0,len(cmds)):
+for cmdindex in range(0,len(cmds)):
 	if isinstance(cmds[cmdindex],SP):
 		if (cmds[cmdindex].pen>0):  # ignore SP commands without a pen number
 			spchunks.append((chunkstart,cmdindex-1))

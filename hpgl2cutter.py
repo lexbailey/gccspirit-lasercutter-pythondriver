@@ -46,7 +46,7 @@ out by the Windows driver (easily editable text):
 Syntax: hpgl2cutter.py settings.sgx input.hpgl output.pcl'''
 
 
-import ConfigParser
+import configparser
 import os
 import sys
 
@@ -136,29 +136,30 @@ def ConfigSectionMap(section):
 if (len(sys.argv) < 3):
   raise Exception('Syntax: hpgl2cutter.py settings.sgx input.hpgl output.pcl')
   
-Config = ConfigParser.SafeConfigParser()
+Config = configparser.SafeConfigParser()
 Config.read(sys.argv[1])
 
 # for each section create a dictionary of {'element':'value'} keys, then
 # put that inside a dictionary of the sections, ie
 # { 'section1':{{'element1':value1},{'element2':value2}}}
-print Config.sections()
+print(Config.sections())
 sectionmap=[]
 sectionlist=[]
 for section in Config.sections():
   sectionmap.append(ConfigSectionMap(section))
   sectionlist.append(section)
 d=dict(zip(sectionlist,sectionmap))
+print(d)
 
-input=open(sys.argv[2],"rb")
-output=open(sys.argv[3],"wb")
+input=open(sys.argv[2],"r")
+output=open(sys.argv[3],"w")
 
 PCLReturnToPJL(output)
 PCLReset(output)
 # don't know which config bit is SmartACT
 #PCLSmartACT(output,)
-if d["PAPER"]["rotary"] == '1':
-  PCLRotaryFixture(output,d["PAPER"]["ro_diam"])
+#if d["PAPER"]["rotary"] == '1':
+#  PCLRotaryFixture(output,d["PAPER"]["ro_diam"])
 PCLFilename(output,os.path.basename(sys.argv[2]))
 PCLLaserPowerTable(output,d["PEN"])
 PCLRasterResolution(output,508)

@@ -49,6 +49,7 @@
 # currently set up for two colours (pens).  Scale factor of 1.4 seems to be
 # required to rescale after EPS conversion: exactly 1.4 or sqrt(2)?
 # Measured to be between 1.40x and 1.41x (ie not 1.414)
+set -e
 
 DEFAULT_MATERIAL=Card2mm.SGX
 PSTOEDIT=pstoedit
@@ -111,16 +112,19 @@ hash $HP2XX 2>&- || { echo >&2 "****** WARNING ******: hp2xx is required for pre
 
 SCRIPT_PARENT="$( cd "$( dirname "$0" )" && pwd )"
 #echo $SCRIPT_PARENT
-SCRIPT_PARENT_WIN=`cygpath -w $SCRIPT_PARENT`
+#SCRIPT_PARENT_WIN=`cygpath -w $SCRIPT_PARENT`
+SCRIPT_PARENT_WIN="$SCRIPT_PARENT"
 #echo $SCRIPT_PARENT_WIN
-export PYTHONPATH=$SCRIPT_PARENT_WIN/Chiplotle-0.3.0-py2.7.egg:$PYTHON_PATH
+#export PYTHONPATH=$SCRIPT_PARENT_WIN/Chiplotle-0.3.0-py2.7.egg:$PYTHON_PATH
 PYTHON=python
 # create directory for chiplotle logfile
 mkdir -p ~/.chiplotle
 
-MATERIAL_FILE_WIN=`cygpath -w $MATERIAL_FILE`
-HP2XX="cygstart $HP2XX_WIN"
+#MATERIAL_FILE_WIN=`cygpath -w $MATERIAL_FILE`
+MATERIAL_FILE_WIN="$MATERIAL_FILE"
+#HP2XX="cygstart $HP2XX_WIN"
 #HP2XX="$HP2XX -c1237465"
+HP2XX="hp2xx"
 
 # calibrated from test runs
 #XSCALE=1.41
