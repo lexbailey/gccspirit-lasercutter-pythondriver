@@ -1,3 +1,7 @@
+# Fork of existing project!
+
+forked to make this work on linux with python3
+
 # Alternative software for GCC Spirit laser cutter 
 
 This is an alternative to the Windows driver for a GCC Spirit GX laser
